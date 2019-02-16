@@ -28,18 +28,18 @@ to convert midi file to wav/flac:
   
   FluidSynth().play_midi('fileName.mid')   #plays the midi file
   
-  # using the default sound font in 44100 Hz sample rate
+  #using the default sound font in 44100 Hz sample rate
   fs = FluidSynth()
   fs.midi_to_audio('fileName.mid', 'outFile.wav')
 
-  # FLAC, a lossless codec, is supported as well (and recommended to be used)
+  #FLAC, a lossless codec, is supported as well (and recommended to be used)
   fs.midi_to_audio('fileName.mid', 'outFile.flac')
 
 
 or as a script:
 
-  # synthesize MIDI to audio
+  #synthesize MIDI to audio
   $ midi2audio fileName.mid outFile.wav
 
-  # also to FLAC
+  #also to FLAC
   $ midi2audio fileName.mid outFile.flac
