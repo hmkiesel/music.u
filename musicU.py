@@ -1,4 +1,5 @@
 import os
+import subprocess
 from flask import Flask, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from twilio.rest import Client
@@ -13,8 +14,8 @@ ALLOWED_EXTENSIONS = set(['mid', 'mp3'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-account_sid = 'AXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-auth_token = 'Autho_Token_From_Twilio'
+account_sid = 'ACb75b16da0e62787332c5b307f41a0aba'
+auth_token = 'a2548b83c329dc1034a8bf898ba592d0'
 client = Client(account_sid, auth_token)
 
 def call_you(target_p, twiML): 
@@ -30,7 +31,7 @@ def new_app(filename):
     application = client.applications \
                         .create(
                              voice_method='GET',
-                             voice_url='https://cfa32cb4.ngrok.io/' + filename,
+                             voice_url='http://29a43eec.ngrok.io/' + filename,
                              friendly_name=filename
                          )
     #print(application.sid)
@@ -58,11 +59,21 @@ def upload_file():
                 file2 and allowed_file(file2.filename):
             file1name = secure_filename(file1.filename)
             file2name = secure_filename(file2.filename)
+
             file1.save(os.path.join(app.config['UPLOAD_FOLDER'], file1name))
             file2.save(os.path.join(app.config['UPLOAD_FOLDER'], file2name))
-            TwiML = new_app(file1name)
+
+            subprocess.call(["./mash.sh", "Shawns/" + file1name, \
+                                          "Shawns/" + file2name])
+
+            iFile = os.listdir("/mnt/c/Users/leevi/Desktop/HopHack/Uploaded/")[0]
+            oFile = iFile.rsplit('.')[0] + ".wav"
+
+            subprocess.call(["timidity", "Uploaded/" + iFile, "-Ow", "-o", "Uploaded/" + oFile])
+
+            TwiML = new_app(oFile)
             mobileNum = request.form['mobileNum']
-            #call_you(mobileNum, TwiML)
+            call_you(mobileNum, TwiML)
             return redirect(url_for('upload_file',
                                     filename=file1name))
     return '''
