@@ -13,8 +13,8 @@ ALLOWED_EXTENSIONS = set(['mid', 'mp3'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-account_sid = 'ACb75b16da0e62787332c5b307f41a0aba'
-auth_token = 'a2548b83c329dc1034a8bf898ba592d0'
+account_sid = 'AXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+auth_token = 'Autho_Token_From_Twilio'
 client = Client(account_sid, auth_token)
 
 def call_you(target_p, twiML): 
