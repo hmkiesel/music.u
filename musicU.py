@@ -14,8 +14,8 @@ ALLOWED_EXTENSIONS = set(['mid', 'mp3'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-account_sid = 'ACb75b16da0e62787332c5b307f41a0aba'
-auth_token = 'a2548b83c329dc1034a8bf898ba592d0'
+account_sid = 'AXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+auth_token = 'Twilio_Auth_Secret'
 client = Client(account_sid, auth_token)
 
 def call_you(target_p, twiML): 
@@ -31,7 +31,7 @@ def new_app(filename):
     application = client.applications \
                         .create(
                              voice_method='GET',
-                             voice_url='http://29a43eec.ngrok.io/' + filename,
+                             voice_url='http://0cca5ae1.ngrok.io/' + filename,
                              friendly_name=filename
                          )
     #print(application.sid)
@@ -63,8 +63,9 @@ def upload_file():
             file1.save(os.path.join(app.config['UPLOAD_FOLDER'], file1name))
             file2.save(os.path.join(app.config['UPLOAD_FOLDER'], file2name))
 
-            subprocess.call(["./mash.sh", "Shawns/" + file1name, \
-                                          "Shawns/" + file2name])
+            #This is the conversion call 
+            subprocess.call(["./mash.sh", "data/" + file1name, \
+                                          "data/" + file2name])
 
             iFile = os.listdir("/mnt/c/Users/leevi/Desktop/HopHack/Uploaded/")[0]
             oFile = iFile.rsplit('.')[0] + ".wav"
@@ -82,7 +83,7 @@ def upload_file():
     <head>
     <title>music.U</title>
     <head profile="http://www.w3.org/2005/10/profile">
-        <link rel="icon" type="image/png" href="LogoVecBlackICO.ico">
+        <link rel="icon" type="image/png" href="static/LogoVecBlackICO.ico">
         </link>
 
     <style>
@@ -258,6 +259,12 @@ def upload_file():
         font-family: courier;
         text-align: center;
         }
+    .pretty {
+        font-family: courier;
+        color: white;
+        background-color: black
+        border: 2px white
+        }
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
@@ -303,7 +310,7 @@ def upload_file():
     <form method=post enctype=multipart/form-data>
         <div class="uploadWrapper;">
             <button class="bigButt">Upload 1st .MIDI!</button>
-            <input required type="file" name=MIDI1>
+            <input required type="file" name=MIDI1 class="pretty">
             </input>
         </div>
 
@@ -311,7 +318,7 @@ def upload_file():
 
         <div class="uploadWrapper;">
             <button class="bigButt">Upload 2nd .MIDI!</button>
-            <input type="file" name="MIDI2">
+            <input type="file" name="MIDI2" class="pretty">
             </input>
         </div>
 
@@ -323,8 +330,8 @@ def upload_file():
 
         <br>
         Mobile Number: <br>
-        <input required type="text" name="mobileNum"> <br><br>
-       <input type="submit" value=Upload>
+        <input required type="text" name="mobileNum" placeholder = "Feed me a mobile number"> <br><br>
+        <input type="submit" value=Upload>
     </form>
 
     <br><br>
@@ -343,21 +350,3 @@ def upload_file():
     </body>
     </html>
         '''
-
-
-
-
-
-
-
-    '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
-    '''
-
-
