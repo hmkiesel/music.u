@@ -20,7 +20,7 @@ Generating new MIDIs for 2-bar pieces after training data:
         --config=cat-mel_2bar_small \
         --run_dir=2bar.tar \
         --mode=sample \
-        --output_dir=/result \
+        --output_dir=/result1 \
         
 Generating new MIDIs based on 2 MIDI input files:
 
@@ -31,7 +31,7 @@ Generating new MIDIs based on 2 MIDI input files:
         --num_outputs=10 \
         --input_midi_1=test1.mid
         --input_midi_2=test2.mid
-        --output_dir=/result1
+        --output_dir=/result1cat
         
 Generating new MIDIs for 16-bar pieces after training data:
         
@@ -40,7 +40,7 @@ Generating new MIDIs for 16-bar pieces after training data:
         --checkpoint_file=16bar.tar \
         --mode=sample \
         --num_outputs=5 \
-        --output_dir=/result \
+        --output_dir=/result2 \
         
 Generating new MIDIs based on 2 MIDI input files:
 
@@ -51,7 +51,7 @@ Generating new MIDIs based on 2 MIDI input files:
         --num_outputs=10 \
         --input_midi_1=n_test1.mid
         --input_midi_2=n_test2.mid
-        --output_dir=/result2
+        --output_dir=/result2cat
 
 to convert midi file to wav/flac:
 
