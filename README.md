@@ -6,9 +6,6 @@ pip install midi2audio
 install_fluidsynth_with_soundfonts_osx.sh
 
 
-midi files are located in short_midis directory.
-
-
 script to generate midi file:
 
 
