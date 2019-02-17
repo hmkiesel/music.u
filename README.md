@@ -1,9 +1,13 @@
 # music.u
 
 dependencies:
+
 pip install magenta
+
 pip install midi2audio
+
 install_fluidsynth_with_soundfonts_osx.sh
+
 
 
 script to generate midi file:
