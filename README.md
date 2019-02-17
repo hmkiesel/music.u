@@ -1,6 +1,7 @@
 # music.u
 
 dependencies:
+pip install tensorflow
 
 pip install magenta
 
@@ -13,6 +14,44 @@ install_fluidsynth_with_soundfonts_osx.sh
 script to generate midi file:
 
 
+Generating new MIDIs for 2-bar pieces after training data:
+
+        music_vae_generate \
+        --config=cat-mel_2bar_small \
+        --run_dir=2bar.tar \
+        --mode=sample \
+        --output_dir=/result \
+        
+Generating new MIDIs based on 2 MIDI input files:
+
+        music_vae_generate \
+        --config=cat-mel_2bar_small \
+        --checkpoint_file=2bar.tar \
+        --mode=interpolate \
+        --num_outputs=10 \
+        --input_midi_1=test1.mid
+        --input_midi_2=test2.mid
+        --output_dir=/result1
+        
+Generating new MIDIs for 16-bar pieces after training data:
+        
+        music_vae_generate \
+        --config=flat-mel_16bar  \
+        --checkpoint_file=16bar.tar \
+        --mode=sample \
+        --num_outputs=5 \
+        --output_dir=/result \
+        
+Generating new MIDIs based on 2 MIDI input files:
+
+        music_vae_generate \
+        --config=flat-mel_16bar \
+        --checkpoint_file=16bar.tar \
+        --mode=interpolate \
+        --num_outputs=10 \
+        --input_midi_1=n_test1.mid
+        --input_midi_2=n_test2.mid
+        --output_dir=/result2
 
 to convert midi file to wav/flac:
 
